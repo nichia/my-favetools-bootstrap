@@ -1,0 +1,36 @@
+<!-- /items/index -->
+
+<div class="container">
+
+  <%= erb :'/partials/_flash_message' %>
+
+  <div class="col-md-8 col-md-offset-2">
+    <% if path_info.match(/\/users\//) %>
+      <% p_user_folder = path_info.split("/") %>
+      <% if path_info.split("/").count == 5 %>
+        <h3>Items shared by <%= path_info.split("/")[-2] %> from folder <%= path_info.split("/")[-1] %></a></h3>
+      <% else %>
+        <h3>Items shared by <%= path_info.split("/")[-1]  %></a></h3>
+      <% end %>
+    <% else %>
+      <h3>All Items</h3>
+    <% end %>
+
+    <table>
+      <tr>
+        <th> Name </th>
+        <th> Description </th>
+        <th> Website </th>
+      </tr>
+
+      <% @items.each do |item| %>
+        <tr>
+          <td><a href="/items/<%= item.id %>/<%= item.slug %>"><%= item.name %></a></td>
+          <td><%= item.description %></td>
+          <td><a href="<%= item.url_link %>" target="_blank">View</a></td>
+        </tr>
+      <% end %>
+    <table>
+
+  </div> <!-- .col-md-8 col-md-offset-2 -->
+</div> <!-- .container -->

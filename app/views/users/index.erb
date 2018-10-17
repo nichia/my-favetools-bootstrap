@@ -1,0 +1,28 @@
+<!-- /users/index -->
+
+<div class="container">
+
+  <%= erb :'/partials/_flash_message' %>
+
+  <div class="col-md-8 col-md-offset-2">
+    <h2>Users</h2>
+    <table>
+      <tr>
+        <th> Username </th>
+        <th> Email </th>
+        <th> View Folders </th>
+        <th> View Items </th>
+      </tr>
+
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><a href="/folders/users/<%= user.slug %>"><%= user.folders.where(privacy: false).count %></a></td>
+          <td><a href="/items/users/<%= user.slug %>"><%= user.items.where(folders: {privacy: false}).count %></a></td>
+        </tr>
+      <% end %>
+    <table>
+
+  </div> <!-- .col-md-8 col-md-offset-2 -->
+</div> <!-- .container -->
