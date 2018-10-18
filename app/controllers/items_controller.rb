@@ -47,7 +47,7 @@ class ItemsController < ApplicationController
       else
         flash[:message] = "Folder \'#{params[:folder_slug]}\' for username \'#{params[:user_slug]}\' not found"
         #redirect to user requesting route
-        redirect :"/folders/users/#{params[:user_slug]}"
+        redirect :"/users/#{params[:user_slug]}/folders"
       end
     else
       flash[:message] = "Username \'#{params[:user_slug]}\' not found"
@@ -194,7 +194,7 @@ class ItemsController < ApplicationController
     if @item && @item.folder.user == current_user
       if @item.destroy
         flash[:message] = "You've successfully deleted your item #{params[:slug]}"
-        redirect :"/folders/users/#{current_user.slug}"
+        redirect :"/users/#{current_user.slug}/folders"
       else
         flash[:message] = "Errors deleting item #{params[:slug]}"
         redirect :"/items/#{@item.id}/#{@item.slug}"
