@@ -5,9 +5,11 @@
   <%= erb :'/partials/_flash_message' %>
 
   <div class="col-md-8 col-md-offset-2">
-    <% if path_info.match(/\/users\//) %>
-      <% p_user = path_info.split("/users/").last %>
-      <h3>Folders shared by <%= p_user %></h3>
+    <!-- url path_info: -->
+    <!-- /users/<username>/folders -->
+    <!-- /folders -->
+    <% if path_info.match(/\A\/users\//) %>
+      <h3>Folders shared by <%= path_info.split("/")[-2] %></h3>
     <% else %>
       <h3>All Folders</h3>
     <% end %>
@@ -29,7 +31,7 @@
           <td><%= folder.category.name %></td>
           <td><%= folder.user.name %></td>
           <td><input type="checkbox" <% if folder.privacy %> checked <% end %>></td>
-          <td><a href="/items/users/<%= folder.user.slug %>/<%= folder.slug %>"><%= folder.items.count %></a></td>
+          <td><a href="/users/<%= folder.user.slug %>/<%= folder.slug %>/items"><%= folder.items.count %></a></td>
         </tr>
       <% end %>
     <table>

@@ -9,10 +9,11 @@ class ItemsController < ApplicationController
     erb :'/items/index'
   end #-- get /items --
 
-  # GET /items/user/:user_slug route #index action
+  # GET /user/:user_slug/items route #index action
   # index page to display all items that belongs to current_user or
   # all public items that belongs to a user
-  get '/items/users/:user_slug' do
+  #get '/items/users/:user_slug' do
+  get '/users/:user_slug/items' do
     if user = User.find_by_slug(params[:user_slug])
       if user == current_user
         #find items that belong to current user, order by latest items
@@ -26,11 +27,12 @@ class ItemsController < ApplicationController
       flash[:message] = "Username \'#{params[:user_slug]}\' not found"
       redirect :"/users"
     end
-  end #-- get /items/user/ --
+  end #-- get /users/:user_slug/items --
 
-  # GET /items/users/:user_slug/:folder_slug route - index action
+  # GET /users/:user_slug/:folder_slug/items route - index action
   # index page to display all items base on username and folder slugs in the url
-  get '/items/users/:user_slug/:folder_slug' do
+  #get '/items/users/:user_slug/:folder_slug' do
+  get '/users/:user_slug/:folder_slug/items' do
     if user = User.find_by_slug(params[:user_slug])
       #find folder_slug that belongs to user.id
       folder = Folder.find_by_slug_user(params[:folder_slug], user.id)
@@ -51,7 +53,7 @@ class ItemsController < ApplicationController
       flash[:message] = "Username \'#{params[:user_slug]}\' not found"
       redirect :"/users"
     end
-  end #-- get /items/users/:user_slug/:folder_slug --
+  end #-- get /users/:user_slug/:folder_slug/items --
 
   # GET /items/new route #new action
   get '/items/new' do

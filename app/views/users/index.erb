@@ -18,8 +18,8 @@
         <tr>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
-          <td><a href="/folders/users/<%= user.slug %>"><%= user.folders.where(privacy: false).count %></a></td>
-          <td><a href="/items/users/<%= user.slug %>"><%= user.items.where(folders: {privacy: false}).count %></a></td>
+          <td><a href="/users/<%= user.slug %>/folders"><%= user.folders.where(privacy: false).count %></a></td>
+          <td><a href="/users/<%= user.slug %>/items"><%= user.items.where(folders: {privacy: false}).count %></a></td>
         </tr>
       <% end %>
     <table>

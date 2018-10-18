@@ -13,12 +13,16 @@
         <!-- 2nd level nav link -->
         <ul class="navbar-nav mr-auto">
           <% if logged_in? %>
+            <!-- url path_info: -->
+            <!-- /folders/new -->
+            <!-- /items/new -->
+            <!-- * -->
             <% if !path_info.match(/\/folders\/new/) %>
               <li class="nav-item">
                 <a href="/folders/new" class="btn btn-info" role="button">New Folder</a>
               </li>
             <% end %>
-            
+
             <% if !path_info.match(/\/items\/new/) %>
               <li class="nav-item">
                 <a href="/items/new" class="btn btn-info" role="button">New Item</a>
